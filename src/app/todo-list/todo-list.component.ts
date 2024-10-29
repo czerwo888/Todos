@@ -1,24 +1,22 @@
 import { Component } from '@angular/core';
-import {Todo} from '../../types/todo';
+import {NgForOf, NgIf} from '@angular/common';
+import {ToDo} from '../shared/interfaces/todo.interface';
 
 @Component({
   selector: 'app-todo-list',
   standalone: true,
-  imports: [],
+  imports: [
+    NgForOf,
+    NgIf
+  ],
   templateUrl: './todo-list.component.html',
   styleUrl: './todo-list.component.css'
 })
 export class TodoListComponent {
-  title = ""
-  description = ""
+  todos : ToDo[] = [];
 
-  todos: Todo[] = []
-
-  addTodo() {
-    this.todos.push({
-      title: this.title,
-      description: this.description,
-      isCompleted: false
-    })
+  addTodo(todo : string) : void {
+    this.todos.push({name: todo, isComplete: true});
+    console.log('Aktualna lista todo: ', this.todos);
   }
 }
